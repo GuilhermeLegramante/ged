@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\WithPagination;
+use App\Http\Livewire\Components\Button;
+use App\Http\Livewire\Traits\WithDatatable;
+use Livewire\Component;
+use App\Services\SessionService;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\App;
+
+
+class {{ componentName }} extends Component
+{
+    use WithDatatable, WithPagination;
+
+    public $entity = '';
+    public $pageTitle = '';
+    public $icon = '';
+    public $searchFieldsLabel = '';
+    public $hasForm = true;
+
+    public $headerColumns = [
+        ['field' => '', 'label' => '', 'css' => ''],
+        ['field' => null, 'label' => 'Ações', 'css' => 'w-5 text-center'],
+    ];
+
+    public $bodyColumns = [
+        ['field' => '', 'type' => '', 'css' => ''],
+    ];
+
+    protected $repositoryClass = 'App\Repositories\...Repository';
+
+    public function mount()
+    {
+        SessionService::start();
+    }
+
+    public function rowButtons(): array
+    {
+        return [
+            Button::create('Selecionar')
+                ->method('showForm')
+                ->class('btn-primary')
+                ->icon('fas fa-search'),
+        ];
+    }
+
+    public function render()
+    {
+        $repository = App::make($this->repositoryClass);
+
+        $data = $repository->all($this->search, $this->sortBy, $this->sortDirection, $this->perPage);
+
+        if ($data->total() == $data->lastItem()) {
+            $this->emit('scrollTop');
+        }
+
+        $buttons = $this->rowButtons();
+
+        return view('livewire.{{ viewName }}', compact('data', 'buttons'));
+    }
+}

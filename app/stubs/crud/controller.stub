@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Http\Controllers;
+
+class {{ entityUcFirst }}Controller extends Controller
+{
+    public function table()
+    {
+        return view('parent.{{ entity }}-table');
+    }
+}

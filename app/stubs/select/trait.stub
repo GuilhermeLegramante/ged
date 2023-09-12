@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Livewire\Traits\Selects;
+
+use Illuminate\Support\Facades\App;
+use App\Repositories\{{ entityUcFirst }}Repository;
+use Str;
+
+trait With{{ entityUcFirst }}Select
+{
+    public ${{ entity }}Id;
+
+    public ${{ entity }}Description;
+
+    public function select{{ entityUcFirst }}($id)
+    {
+        $repository = App::make({{ entityUcFirst }}Repository::class);
+
+        $data = $repository->findById($id);
+
+        $this->{{ entity }}Id = $data->id;
+
+        $this->{{ entity }}Description = Str::words($data->description, 5);
+
+        $this->resetValidation('{{ entity }}Id');
+    }
+}

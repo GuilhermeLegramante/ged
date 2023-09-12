@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use App\Http\Livewire\Traits\WithSelect;
+use Livewire\Component;
+
+class {{ entityUcFirst }}Select extends Component
+{
+    use WithSelect;
+
+    public $title = '{{ entityPtBr }}';
+    public $modalId = 'modal-select-{{ entity }}';
+    public $searchFieldsLabel = 'Código ou Descrição';
+
+    public $closeModal = 'close{{ entityUcFirst }}Modal';
+    public $selectModal = 'select{{ entityUcFirst }}';
+    public $showModal = 'show{{ entityUcFirst }}Modal';
+
+    protected $repositoryClass = 'App\Repositories\{{ entityUcFirst }}Repository';
+
+    public function render()
+    {
+        $this->insertButtonOnSelectModal = true;
+
+        $this->addMethod = 'show{{ entityUcFirst }}FormModal';
+
+        $this->search();
+
+        $data = $this->data;
+
+        return view('livewire.{{ entity }}-select', compact('data'));
+    }
+}

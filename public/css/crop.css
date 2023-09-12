@@ -1,0 +1,30 @@
+img {
+    display: block;
+    max-width: 100%;
+}
+
+.preview {
+    overflow: hidden;
+    width: 160px;
+    height: 160px;
+    margin: 10px;
+    border: 1px solid red;
+}
+
+.modal-lg {
+    max-width: 1000px !important;
+}
+
+.cropper-dashed {
+    border: 0 dashed red;
+    width: 3px;
+    height: 3px;
+    display: block;
+    opacity: 0.5;
+    position: absolute;
+}
+
+.cropper-center::before,
+.cropper-center::after {
+    background-color: red;
+}

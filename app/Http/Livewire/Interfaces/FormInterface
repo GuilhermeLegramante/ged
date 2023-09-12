@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Livewire\Interfaces;
+
+interface FormInterface
+{
+    public function mount($id = null);
+
+    public function setFields($data);
+
+    public function customValidate();
+
+    public function customDeleteValidate();
+
+    public function updated();
+
+    public function showModalDelete();
+
+    public function cleanFields();
+
+    public function store();
+
+    public function update();
+
+    public function destroy();
+}
