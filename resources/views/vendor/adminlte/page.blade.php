@@ -2,7 +2,7 @@
 
 @section('adminlte_css_pre')
 <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-<link rel="icon" sizes="192x192" href="https://hardsoft.s3.sa-east-1.amazonaws.com/_cantina-store/icone-cantina-store.jpg">
+<link rel="icon" sizes="192x192" href="img/logo-sem-fundo.png">
 @stop
 
 @section('adminlte_css')

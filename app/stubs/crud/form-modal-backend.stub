@@ -21,8 +21,15 @@ class {{ formModalComponentName }} extends Component
     public $description;
 
     protected $inputs = [
-        ['field' => 'recordId', 'edit' => true],
-        ['field' => 'description', 'edit' => true, 'type' => 'string'],
+        [
+            'field' => 'recordId',
+            'edit' => true
+        ],
+        [
+            'field' => 'description',
+            'edit' => true,
+            'type' => 'string'
+        ],
     ];
 
     protected $listeners = [
@@ -54,6 +61,10 @@ class {{ formModalComponentName }} extends Component
             if (isset($data)) {
                 $this->setFields($data);
             }
+        } else {
+            $this->isEdition = false;
+
+            $this->reset('recordId', 'description');
         }
     }
 
