@@ -135,7 +135,7 @@ class MakeSelectComponent extends Command
 
         $this->stub = File::get(app_path() . '/stubs/select/back.stub');
 
-        $this->stub = str_replace('{{ entity }}', $this->entity, $this->stub);
+        $this->stub = str_replace('{{ entity }}', Str::kebab($this->entity), $this->stub);
         $this->stub = str_replace('{{ entityUcFirst }}', $this->entityUcFirst, $this->stub);
         $this->stub = str_replace('{{ entityPtBr }}', $this->entityPtBr, $this->stub);
 
