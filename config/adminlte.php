@@ -231,6 +231,12 @@ return [
                     'url' => '/usuario',
                     'active' => ['usuario/*'],
                 ],
+                [
+                    'text' => 'Tipos de Documento',
+                    'icon' => 'nav-icon fas fa-copy',
+                    'url' => '/tipo-de-documento',
+                    'active' => ['tipo-de-documento/*'],
+                ],
             ],
         ],
         [

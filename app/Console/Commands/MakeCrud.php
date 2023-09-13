@@ -142,7 +142,7 @@ class MakeCrud extends Command
 
         $this->stub = File::get(app_path() . '/stubs/crud/controller.stub');
 
-        $this->stub = str_replace('{{ entity }}', $this->entity, $this->stub);
+        $this->stub = str_replace('{{ entity }}', Str::kebab($this->entity), $this->stub);
 
         $this->stub = str_replace('{{ entityUcFirst }}', $this->entityUcFirst, $this->stub);
 
@@ -155,7 +155,7 @@ class MakeCrud extends Command
 
         $this->stub = File::get(app_path() . '/stubs/crud/table-view.stub');
 
-        $this->stub = str_replace('{{ entity }}', $this->entity, $this->stub);
+        $this->stub = str_replace('{{ entity }}', Str::kebab($this->entity), $this->stub);
 
         File::put($path, $this->stub);
     }
@@ -199,7 +199,7 @@ class MakeCrud extends Command
         $path = base_path() . '\\resources\\views\\livewire\\' . Str::kebab($this->entity) . '-table.blade.php';
 
         $this->stub = File::get(app_path() . '/stubs/crud/table-frontend.stub');
-        $this->stub = str_replace('{{ entity }}', $this->entity, $this->stub);
+        $this->stub = str_replace('{{ entity }}', Str::kebab($this->entity), $this->stub);
         $this->stub = str_replace('{{ entityUcFirst }}', $this->entityUcFirst, $this->stub);
 
         File::put($path, $this->stub);
@@ -216,7 +216,7 @@ class MakeCrud extends Command
 
         $this->stub = str_replace('{{ formModalComponentName }}', $this->formModalComponentName, $this->stub);
         $this->stub = str_replace('{{ formModalViewName }}', Str::kebab($this->formModalComponentName), $this->stub);
-        $this->stub = str_replace('{{ entity }}', $this->entity, $this->stub);
+        $this->stub = str_replace('{{ entity }}', Str::kebab($this->entity), $this->stub);
         $this->stub = str_replace('{{ entityPtBr }}', $this->entityPtBr, $this->stub);
         $this->stub = str_replace('{{ entityUcFirst }}', $this->entityUcFirst, $this->stub);
 

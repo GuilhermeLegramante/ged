@@ -16,7 +16,12 @@ class CreateDocumentTypeTable extends Migration
         Schema::create('document_types', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('description')->unique();
+            $table->integer('user_id');
             $table->timestamps();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

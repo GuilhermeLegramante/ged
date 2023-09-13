@@ -12,4 +12,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('/usuario')->group(function () {
         Route::get('/', 'UserController@table')->name('user.table');
     });
+
+    Route::prefix('/tipo-de-documento')->group(function () {
+        Route::get('/', 'DocumentTypeController@table')->name('document-type.table');
+    });
 });
