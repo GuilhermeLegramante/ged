@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumentsTable extends Migration
+class CreateDocumentTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,19 @@ class CreateDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('document_tags', function (Blueprint $table) {
             $table->integer('id', true);
             $table->integer('user_id');
-            $table->integer('document_type_id')->nullable();
-            $table->string('number')->nullable();
-            $table->date('date')->nullable();
-            $table->text('note')->nullable();
-            $table->string('path')->unique();
-            $table->string('filename')->nullable();
+            $table->integer('document_id');
+            $table->string('tag');
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->foreign('document_type_id')
+            $table->foreign('document_id')
                 ->references('id')
-                ->on('document_types')
+                ->on('documents')
                 ->onDelete('cascade');
         });
     }
@@ -41,6 +37,6 @@ class CreateDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('document_tags');
     }
 }
