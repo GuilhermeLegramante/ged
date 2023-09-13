@@ -9,6 +9,10 @@ Route::get('/sair', 'AuthController@logout')->name('logout');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'MainController@dashboard')->name('dashboard');
 
+    Route::prefix('/documento')->group(function () {
+        Route::get('/', 'DocumentController@table')->name('document.table');
+    });
+
     Route::prefix('/usuario')->group(function () {
         Route::get('/', 'UserController@table')->name('user.table');
     });
