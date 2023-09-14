@@ -5,7 +5,12 @@
         <div class="input-group">
             @foreach ($model as $key => $item)
             <div class="mr-1" wire:click="removeTag({{ $key }})">
-                <small class="cursor-pointer badge badge-primary mt-1">{{ $item }} <small><i class="fas fa-times"></i></small> </small>
+                <small class="cursor-pointer badge badge-primary mt-1">
+                    {{ $item }}
+                    <small>
+                        <i class="fas fa-times"></i>
+                    </small>
+                </small>
             </div>
             @endforeach
         </div>

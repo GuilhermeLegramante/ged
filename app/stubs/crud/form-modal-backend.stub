@@ -20,7 +20,7 @@ class {{ formModalComponentName }} extends Component
 
     public $description;
 
-    protected $inputs = [
+    public $inputs = [
         [
             'field' => 'recordId',
             'edit' => true
@@ -49,6 +49,10 @@ class {{ formModalComponentName }} extends Component
 
     public function show{{ entityUcFirst }}FormModal($id = null)
     {
+        $this->reset('recordId', 'description');
+
+        $this->resetValidation();
+
         if (isset($id)) {
             $this->method = 'update';
 
@@ -61,10 +65,6 @@ class {{ formModalComponentName }} extends Component
             if (isset($data)) {
                 $this->setFields($data);
             }
-        } else {
-            $this->isEdition = false;
-
-            $this->reset('recordId', 'description');
         }
     }
 

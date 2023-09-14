@@ -23,6 +23,7 @@ class DocumentRepository
             ->select(
                 $this->table . '.id AS id',
                 $this->table . '.note AS description',
+                $this->table . '.note AS note',
                 $this->table . '.number AS number',
                 $this->table . '.date AS date',
                 $this->table . '.path AS path',
@@ -63,22 +64,24 @@ class DocumentRepository
             null
         );
 
+        $path = $this->uploadFile($data['file']);
+
         $registerId = DB::table($this->table)
             ->insertGetId(
                 [
                     'note' => $data['note'],
                     'number' => isset($data['number']) ? $data['number'] : null,
                     'date' => isset($data['date']) ? $data['date'] : null,
-                    'path' => $data['path'],
-                    'filename' => isset($data['filename']) ? $data['filename'] : null,
-                    'document_type_id' => isset($data['document_type_id']) ? $data['document_type_id'] : null,
+                    'path' => $path,
+                    'filename' => $data['file']->getClientOriginalName(),
+                    'document_type_id' => isset($data['documentTypeId']) ? $data['documentTypeId'] : null,
                     'user_id' => session()->get('userId'),
                     'created_at' => now(),
                 ]
             );
 
         if (isset($data['tags'])) {
-            $this->insertTags($data['tags'], $data['recordId']);
+            $this->insertTags($data['tags'], $registerId);
         }
 
         return $registerId;
@@ -97,7 +100,13 @@ class DocumentRepository
             json_encode($data)
         );
 
-        $path = $this->uploadFile($data['file']);
+        if (isset($data['file'])) {
+            $path = $this->uploadFile($data['file']);
+            $filename = $data['file']->getClientOriginalName();
+        } else {
+            $path = $data['storedFilePath'];
+            $filename = $data['storedFilename'];
+        }
 
         DB::table($this->table)
             ->where('id', $data['recordId'])
@@ -107,8 +116,8 @@ class DocumentRepository
                     'number' => isset($data['number']) ? $data['number'] : null,
                     'date' => isset($data['date']) ? $data['date'] : null,
                     'path' => $path,
-                    'filename' => isset($data['filename']) ? $data['file'] : null,
-                    'document_type_id' => isset($data['document_type_id']) ? $data['document_type_id'] : null,
+                    'filename' => $filename,
+                    'document_type_id' => isset($data['documentTypeId']) ? $data['documentTypeId'] : null,
                     'updated_at' => now(),
                 ]
             );
@@ -131,6 +140,18 @@ class DocumentRepository
             null
         );
 
+        $document = DB::table($this->table)
+            ->where('id', $data['recordId'])
+            ->select('path')
+            ->get()
+            ->first();
+
+        Storage::disk('s3')->delete($document->path);
+
+        DB::table('document_tags')
+            ->where('document_id', $data['recordId'])
+            ->delete();
+
         DB::table($this->table)
             ->where('id', $data['recordId'])
             ->delete();
@@ -138,10 +159,20 @@ class DocumentRepository
 
     public function findById($id)
     {
-        return $this->baseQuery
+        $document = $this->baseQuery
             ->where($this->table . '.id', $id)
             ->get()
             ->first();
+
+        $tags = DB::table('document_tags')
+            ->where('document_tags.document_id', $id)
+            ->select(
+                'document_tags.tag AS tag',
+            )->get();
+
+        $document->tags = $tags;
+
+        return $document;
     }
 
     private function uploadFile($file)

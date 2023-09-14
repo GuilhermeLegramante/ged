@@ -22,6 +22,13 @@ trait With{{ entityUcFirst }}Select
 
         $this->{{ entity }}Description = Str::words($data->description, 5);
 
+        array_push($this->inputs,
+            [
+                'field' => '{{ entity }}Id',
+                'edit' => true,
+            ]
+        );
+
         $this->resetValidation('{{ entity }}Id');
     }
 }

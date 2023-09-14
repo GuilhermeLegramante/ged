@@ -3,12 +3,15 @@
 namespace App\Http\Livewire;
 
 use App;
+use App\Http\Livewire\Traits\Selects\WithDocumentTypeSelect;
 use App\Http\Livewire\Traits\WithForm;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class DocumentFormModal extends Component
 {
-    use WithForm;
+    use WithForm, WithDocumentTypeSelect, WithFileUploads;
 
     public $entity;
     public $pageTitle;
@@ -18,37 +21,79 @@ class DocumentFormModal extends Component
 
     protected $repositoryClass = 'App\Repositories\DocumentRepository';
 
-    public $description;
+    public $note;
+    public $tag;
+    public $tags = [];
+    public $file;
+    public $number;
+    public $date;
 
-    protected $inputs = [
+    public $storedFilePath;
+    public $storedFilename;
+
+    public $inputs = [
         [
             'field' => 'recordId',
             'edit' => true,
         ],
         [
-            'field' => 'description',
+            'field' => 'note',
             'edit' => true,
             'type' => 'string',
+        ],
+        [
+            'field' => 'file',
+            'edit' => true,
+            'type' => 'file',
+        ],
+        [
+            'field' => 'number',
+            'edit' => true,
+            'type' => 'string',
+        ],
+        [
+            'field' => 'date',
+            'edit' => true,
+        ],
+        [
+            'field' => 'tags',
+            'edit' => true,
+        ],
+        [
+            'field' => 'storedFilePath',
+            'edit' => true,
+        ],
+        [
+            'field' => 'storedFilename',
+            'edit' => true,
         ],
     ];
 
     protected $listeners = [
         'showDocumentFormModal',
+        'selectDocumentType',
     ];
 
     protected $validationAttributes = [
-        'description' => 'Descrição',
+        'note' => 'Descrição',
+        'documentTypeId' => 'Tipo de Documento',
+        'file' => 'Arquivo',
     ];
 
     public function rules()
     {
         return [
-            'description' => ['required'],
+            'note' => ['required'],
+            'file' => [Rule::requiredIf(!$this->isEdition)],
         ];
     }
 
     public function showDocumentFormModal($id = null)
     {
+        $this->reset('recordId', 'note', 'file', 'number', 'date', 'tags');
+
+        $this->resetValidation();
+
         if (isset($id)) {
             $this->method = 'update';
 
@@ -61,10 +106,6 @@ class DocumentFormModal extends Component
             if (isset($data)) {
                 $this->setFields($data);
             }
-        } else {
-            $this->isEdition = false;
-
-            $this->reset('recordId', 'description');
         }
     }
 
@@ -93,7 +134,25 @@ class DocumentFormModal extends Component
     {
         $this->recordId = $data->id;
 
-        $this->description = $data->description;
+        $this->note = $data->note;
+
+        $this->number = $data->number;
+
+        $this->date = $data->date;
+
+        $this->storedFilePath = $data->path;
+
+        $this->storedFilename = $data->filename;
+
+        if (isset($data->documentTypeId)) {
+            $this->selectDocumentType($data->documentTypeId);
+        }
+
+        if (isset($data->tags)) {
+            foreach ($data->tags as $value) {
+                array_push($this->tags, $value->tag);
+            }
+        }
     }
 
     public function customValidate()
@@ -109,5 +168,16 @@ class DocumentFormModal extends Component
     public function render()
     {
         return view('livewire.document-form-modal');
+    }
+
+    public function updatedTag()
+    {
+        array_push($this->tags, $this->tag);
+        $this->tag = '';
+    }
+
+    public function removeTag($key)
+    {
+        unset($this->tags[$key]);
     }
 }

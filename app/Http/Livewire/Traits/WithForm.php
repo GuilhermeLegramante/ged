@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 trait WithForm
 {
-    public $isEdition;
+    public $isEdition = false;
     public $recordId;
 
     public function updated($propertyName)

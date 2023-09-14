@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Traits\Selects;
 
-use Illuminate\Support\Facades\App;
 use App\Repositories\DocumentTypeRepository;
+use Illuminate\Support\Facades\App;
 use Str;
 
 trait WithDocumentTypeSelect
@@ -21,6 +21,13 @@ trait WithDocumentTypeSelect
         $this->documentTypeId = $data->id;
 
         $this->documentTypeDescription = Str::words($data->description, 5);
+
+        array_push($this->inputs,
+            [
+                'field' => 'documentTypeId',
+                'edit' => true,
+            ]
+        );
 
         $this->resetValidation('documentTypeId');
     }

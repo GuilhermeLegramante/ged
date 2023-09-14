@@ -2,14 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\WithPagination;
 use App\Http\Livewire\Components\Button;
 use App\Http\Livewire\Traits\WithDatatable;
-use Livewire\Component;
 use App\Services\SessionService;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\App;
-
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class DocumentTypeTable extends Component
 {
@@ -50,14 +48,14 @@ class DocumentTypeTable extends Component
             'type' => 'string',
             'css' => 'text-center',
             'visible' => 'true',
-            'editable' => 'false'
+            'editable' => 'false',
         ],
         [
             'field' => 'description',
             'type' => 'string',
             'css' => 'pl-12px',
             'visible' => 'true',
-            'editable' => 'false'
+            'editable' => 'false',
         ],
     ];
 
