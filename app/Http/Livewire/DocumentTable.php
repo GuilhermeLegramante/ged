@@ -31,7 +31,37 @@ class DocumentTable extends Component
         [
             'field' => 'note',
             'label' => 'Descrição',
-            'css' => 'w-80',
+            'css' => 'w-40',
+            'visible' => 'true',
+        ],
+        [
+            'field' => 'path',
+            'label' => 'Arquivo',
+            'css' => 'w-40',
+            'visible' => 'true',
+        ],
+        [
+            'field' => 'number',
+            'label' => 'Número',
+            'css' => 'w-10',
+            'visible' => 'true',
+        ],
+        [
+            'field' => 'date',
+            'label' => 'Data do Documento',
+            'css' => 'w-10',
+            'visible' => 'true',
+        ],
+        [
+            'field' => 'createdAt',
+            'label' => 'Incluído em',
+            'css' => 'w-10',
+            'visible' => 'true',
+        ],
+        [
+            'field' => 'updatedAt',
+            'label' => 'Editado em',
+            'css' => 'w-10',
             'visible' => 'true',
         ],
         [
@@ -56,6 +86,41 @@ class DocumentTable extends Component
             'css' => 'pl-12px',
             'visible' => 'true',
             'editable' => 'true',
+        ],
+        [
+            'field' => 'path',
+            'type' => 'link',
+            'css' => 'pl-12px',
+            'visible' => 'true',
+            'editable' => 'false',
+        ],
+        [
+            'field' => 'number',
+            'type' => 'string',
+            'css' => 'pl-12px',
+            'visible' => 'true',
+            'editable' => 'true',
+        ],
+        [
+            'field' => 'date',
+            'type' => 'date',
+            'css' => 'pl-12px',
+            'visible' => 'true',
+            'editable' => 'true',
+        ],
+        [
+            'field' => 'createdAt',
+            'type' => 'timestamps',
+            'css' => 'pl-12px',
+            'visible' => 'true',
+            'editable' => 'false',
+        ],
+        [
+            'field' => 'updatedAt',
+            'type' => 'timestamps',
+            'css' => 'pl-12px',
+            'visible' => 'true',
+            'editable' => 'false',
         ],
     ];
 

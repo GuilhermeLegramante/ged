@@ -21,12 +21,19 @@
             </div>
             @break
 
+            @case('link')
+            <small class="cursor-pointer badge badge-primary mt-1">
+                <a class="cursor-pointer badge badge-primary" target="_blank" href="{{ Storage::disk('s3')->url($item->{$column['field']}) }}">VISUALIZAR O ARQUIVO</a>
+                <i class="fas fa-paperclip"></i>
+            </small>
+            @break
+
             @case('timestamps')
-            {{ date('d/m/Y H:i:s', strtotime($item->{$column['field']})) }}
+            {{ date('d/m/Y H:i:s', strtotime($item->{$column['field']})) != '31/12/1969 21:00:00' ? date('d/m/Y H:i:s', strtotime($item->{$column['field']})) : ' ' }}
             @break
 
             @case('date')
-            {{ date('d/m/Y', strtotime($item->{$column['field']})) }}
+            {{ date('d/m/Y', strtotime($item->{$column['field']})) != '31/12/1969' ? date('d/m/Y', strtotime($item->{$column['field']})) : ' ' }}
             @break
 
             @case('year')
