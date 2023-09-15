@@ -24,7 +24,7 @@
 @endif
 
 @section('body')
-<div class="login-page" style="background-image: url('vendor/adminlte/dist/img/COLOCAR-IMAGEM-AQUI');
+<div class="login-page" style="background-image: url('vendor/adminlte/dist/img/fundo.jpg');
     background-size: cover; width:100%;">
     <div class="login-box" style="border-radius: 12px; background: #ffffff; opacity: 100%; position: absolute; z-index: 99;">
         @include('partials.login-logo-and-text')
