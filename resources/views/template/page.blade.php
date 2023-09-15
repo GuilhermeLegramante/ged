@@ -10,8 +10,7 @@
 
 <br>
 @section('footer')
-<strong> <a href="#">{{ config('app.name') }}</a> {{ date('Y') }}</strong> -
-v{{ config('messages.version') }}
+@include('partials.footer.page')
 @endsection
 
 @section('css')
