@@ -1,9 +1,9 @@
-# hsGED - ERP
+# hsGED - ERP HardSoft
 
 <hr>
 
 ## 💻 Resumo das Versões
 
-- 1.0.0 (05/06/2023) - Cadastro de Produto para validação com stakeholders
+- 1.0.0 (15/09/2023) - Cadastro de Documento
 
 <hr>
