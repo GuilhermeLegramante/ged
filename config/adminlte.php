@@ -226,10 +226,10 @@ return [
             'icon' => 'nav-icon fas fa-table',
             'submenu' => [
                 [
-                    'text' => 'Usuários',
-                    'icon' => 'nav-icon fas fa-users',
-                    'url' => '/usuario',
-                    'active' => ['usuario/*'],
+                    'text' => 'Pessoas',
+                    'icon' => 'nav-icon fas fa-user-friends',
+                    'url' => '/pessoa',
+                    'active' => ['pessoa/*'],
                 ],
                 [
                     'text' => 'Tipos de Documento',
@@ -237,6 +237,13 @@ return [
                     'url' => '/tipo-de-documento',
                     'active' => ['tipo-de-documento/*'],
                 ],
+                [
+                    'text' => 'Usuários',
+                    'icon' => 'nav-icon fas fa-users',
+                    'url' => '/usuario',
+                    'active' => ['usuario/*'],
+                ],
+
             ],
         ],
         [

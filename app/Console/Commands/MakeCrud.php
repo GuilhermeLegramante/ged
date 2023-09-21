@@ -229,14 +229,14 @@ class MakeCrud extends Command
 
         $this->stub = File::get(app_path() . '/stubs/crud/form-modal-frontend.stub');
 
+        $this->stub = str_replace('{{ entity }}', $this->entity, $this->stub);
+        $this->stub = str_replace('{{ entityUcFirst }}', $this->entityUcFirst, $this->stub);
+
         File::put($path, $this->stub);
 
         $this->stub = File::get(app_path() . '/stubs/crud/form-modal-fields.stub');
 
         $path = base_path() . '\\resources\\views\\partials\\forms\\' . Str::kebab($this->entity) . '.blade.php';
-
-        $this->stub = str_replace('{{ entity }}', $this->entity, $this->stub);
-        $this->stub = str_replace('{{ entityUcFirst }}', $this->entityUcFirst, $this->stub);
 
         File::put($path, $this->stub);
     }

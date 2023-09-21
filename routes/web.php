@@ -13,11 +13,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', 'DocumentController@table')->name('document.table');
     });
 
-    Route::prefix('/usuario')->group(function () {
-        Route::get('/', 'UserController@table')->name('user.table');
+    Route::prefix('/pessoa')->group(function () {
+        Route::get('/', 'PersonController@table')->name('person.table');
     });
 
     Route::prefix('/tipo-de-documento')->group(function () {
         Route::get('/', 'DocumentTypeController@table')->name('document-type.table');
     });
+
+    Route::prefix('/usuario')->group(function () {
+        Route::get('/', 'UserController@table')->name('user.table');
+    });
+
 });
