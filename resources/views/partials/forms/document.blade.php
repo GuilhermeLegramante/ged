@@ -71,16 +71,35 @@
 </div>
 
 <div class="row">
+    @include('partials.inputs.select-modal', [
+    'columnSize' => 12,
+    'label' => 'Pessoa(s) Relacionada(s)',
+    'method' => 'showPersonSelectModal',
+    'model' => 'personId',
+    'description' => $personDescription,
+    'modelId' => $personId,
+    'cleanFields' => 'personId,personDescription',
+    ])
+</div>
+<div class="row">
+    @include('partials.inputs.person-badge-list', [
+    'columnSize' => 12,
+    'label' => '',
+    'model' => $persons,
+    ])
+</div>
+
+<div class="row mt-1">
     @include('partials.inputs.text', [
     'columnSize' => 12,
-    'label' => 'Incluir Tag',
+    'label' => 'Tag(s)',
     'model' => 'tag',
     ])
 </div>
 <div class="row">
     @include('partials.inputs.badge-list', [
     'columnSize' => 12,
-    'label' => 'Tags adicionadas',
+    'label' => '',
     'model' => $tags,
     ])
 </div>

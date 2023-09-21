@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App;
 use App\Http\Livewire\Traits\Selects\WithDocumentTypeSelect;
+use App\Http\Livewire\Traits\Selects\WithPersonSelect;
 use App\Http\Livewire\Traits\WithForm;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -11,7 +12,7 @@ use Livewire\WithFileUploads;
 
 class DocumentFormModal extends Component
 {
-    use WithForm, WithDocumentTypeSelect, WithFileUploads;
+    use WithForm, WithDocumentTypeSelect, WithFileUploads, WithPersonSelect;
 
     public $entity;
     public $pageTitle;
@@ -27,6 +28,7 @@ class DocumentFormModal extends Component
     public $file;
     public $number;
     public $date;
+    public $persons = [];
 
     public $storedFilePath;
     public $storedFilename;
@@ -67,17 +69,23 @@ class DocumentFormModal extends Component
             'field' => 'storedFilename',
             'edit' => true,
         ],
+        [
+            'field' => 'persons',
+            'edit' => true,
+        ],
     ];
 
     protected $listeners = [
         'showDocumentFormModal',
         'selectDocumentType',
+        'selectPerson',
     ];
 
     protected $validationAttributes = [
         'note' => 'Descrição',
         'documentTypeId' => 'Tipo de Documento',
         'file' => 'Arquivo',
+        'personId' => 'Pessoa',
     ];
 
     public function rules()
@@ -90,7 +98,7 @@ class DocumentFormModal extends Component
 
     public function showDocumentFormModal($id = null)
     {
-        $this->reset('recordId', 'note', 'file', 'number', 'date', 'tags');
+        $this->reset('recordId', 'note', 'file', 'number', 'date', 'tags', 'persons');
 
         $this->resetValidation();
 
@@ -153,6 +161,12 @@ class DocumentFormModal extends Component
                 array_push($this->tags, $value->tag);
             }
         }
+
+        if (isset($data->persons)) {
+            foreach ($data->persons as $person) {
+                array_push($this->persons, ['id' => $person->id, 'description' => $person->name]);
+            }
+        }
     }
 
     public function customValidate()
@@ -179,5 +193,15 @@ class DocumentFormModal extends Component
     public function removeTag($key)
     {
         unset($this->tags[$key]);
+    }
+
+    public function setPersons()
+    {
+        array_push($this->persons, ['id' => $this->personId, 'description' => $this->personDescription]);
+    }
+
+    public function removePerson($key)
+    {
+        unset($this->persons[$key]);
     }
 }

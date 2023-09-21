@@ -55,6 +55,7 @@ class DocumentRepository
 
     public function save($data)
     {
+
         LogService::saveLog(
             session()->get('userId'),
             $this->table,
@@ -82,6 +83,10 @@ class DocumentRepository
 
         if (isset($data['tags'])) {
             $this->insertTags($data['tags'], $registerId);
+        }
+
+        if (isset($data['persons'])) {
+            $this->insertPersons($data['persons'], $registerId);
         }
 
         return $registerId;
@@ -124,6 +129,10 @@ class DocumentRepository
 
         if (isset($data['tags'])) {
             $this->insertTags($data['tags'], $data['recordId']);
+        }
+
+        if (isset($data['persons'])) {
+            $this->insertPersons($data['persons'], $data['recordId']);
         }
     }
 
@@ -172,6 +181,16 @@ class DocumentRepository
 
         $document->tags = $tags;
 
+        $persons = DB::table('document_persons')
+            ->join('persons', 'persons.id', '=', 'document_persons.person_id')
+            ->where('document_persons.document_id', $id)
+            ->select(
+                'persons.id AS id',
+                'persons.name AS name',
+            )->get();
+
+        $document->persons = $persons;
+
         return $document;
     }
 
@@ -190,12 +209,31 @@ class DocumentRepository
             ->where('document_id', $documentId)
             ->delete();
 
-        foreach ($tags as $key => $tag) {
+        foreach ($tags as $tag) {
             DB::table('document_tags')
                 ->insert(
                     [
                         'document_id' => $documentId,
                         'tag' => $tag,
+                        'user_id' => session()->get('userId'),
+                        'created_at' => now(),
+                    ]
+                );
+        }
+    }
+
+    private function insertPersons($persons, $documentId)
+    {
+        DB::table('document_persons')
+            ->where('document_id', $documentId)
+            ->delete();
+
+        foreach ($persons as $person) {
+            DB::table('document_persons')
+                ->insert(
+                    [
+                        'document_id' => $documentId,
+                        'person_id' => $person['id'],
                         'user_id' => session()->get('userId'),
                         'created_at' => now(),
                     ]
