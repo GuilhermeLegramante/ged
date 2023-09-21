@@ -5,6 +5,7 @@
 
     @livewire('person-select')
 
+    @livewire('person-form-modal')
 </div>
 @push('scripts')
 <script>
@@ -20,6 +21,14 @@
     window.livewire.on('showPersonSelectModal', () => {
         $('#modal-select-person').modal('show');
         Livewire.emit('personSelectModal');
+    });
+
+    window.livewire.on('showPersonFormModal', () => {
+        $('#person-form-modal').modal('show');
+    });
+
+    window.livewire.on('hidePersonFormModal', () => {
+        $('#person-form-modal').modal('hide');
     });
 
 </script>
