@@ -6,6 +6,7 @@ use App\Services\ErrorHandler;
 use App\Services\FormService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Str;
 
 trait WithForm
 {
@@ -47,11 +48,13 @@ trait WithForm
             session()->flash('success', 'Registro salvo com sucesso');
             DB::commit();
 
-            // $this->emit('hide' . ucfirst($this->entity) . 'FormModal');
+            $this->emit('hide' . ucfirst(Str::camel($this->entity)) . 'FormModal');
 
             $this->emit('scrollTop');
 
-            // return redirect()->route($this->entity . '.table');
+            if ($this->refreshAfterAction) {
+                return redirect()->route($this->entity . '.table');
+            }
         } catch (\Exception $error) {
             DB::rollback();
 
@@ -78,11 +81,13 @@ trait WithForm
             session()->flash('success', 'Registro editado com sucesso');
             DB::commit();
 
-            // $this->emit('hide' . ucfirst($this->entity) . 'FormModal');
+            $this->emit('hide' . ucfirst(Str::camel($this->entity)) . 'FormModal');
 
             $this->emit('scrollTop');
 
-            // return redirect()->route($this->entity . '.table');
+            if ($this->refreshAfterAction) {
+                return redirect()->route($this->entity . '.table');
+            }
         } catch (\Exception $error) {
             DB::rollback();
 

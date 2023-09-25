@@ -20,6 +20,8 @@ class DocumentFormModal extends Component
     public $method = 'store';
     public $formTitle;
 
+    public $refreshAfterAction = false;
+
     protected $repositoryClass = 'App\Repositories\DocumentRepository';
 
     public $note;
@@ -117,11 +119,13 @@ class DocumentFormModal extends Component
         }
     }
 
-    public function mount($id = null)
+    public function mount($id = null, $refreshAfterAction = false)
     {
         $this->formTitle = strtoupper('DADOS DO(A) Documento');
         $this->entity = 'document';
         $this->pageTitle = 'Documento';
+
+        $this->refreshAfterAction = $refreshAfterAction;
 
         if (isset($id)) {
             $this->method = 'update';

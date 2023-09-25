@@ -17,6 +17,8 @@ class PersonFormModal extends Component
     public $method = 'store';
     public $formTitle;
 
+    public $refreshAfterAction = false;
+
     protected $repositoryClass = 'App\Repositories\PersonRepository';
 
     public $name;
@@ -98,11 +100,13 @@ class PersonFormModal extends Component
         $this->phone = Mask::phone($this->phone);
     }
 
-    public function mount($id = null)
+    public function mount($id = null, $refreshAfterAction = false)
     {
         $this->formTitle = strtoupper('DADOS DO(A) Pessoa');
         $this->entity = 'person';
         $this->pageTitle = 'Pessoa';
+
+        $this->refreshAfterAction = $refreshAfterAction;
 
         if (isset($id)) {
             $this->method = 'update';

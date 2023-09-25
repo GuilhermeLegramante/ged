@@ -16,6 +16,8 @@ class {{ formModalComponentName }} extends Component
     public $method = 'store';
     public $formTitle;
 
+    public $refreshAfterAction = false;
+
     protected $repositoryClass = 'App\Repositories\{{ entityUcFirst }}Repository';
 
     public $description;
@@ -68,11 +70,13 @@ class {{ formModalComponentName }} extends Component
         }
     }
 
-    public function mount($id = null)
+    public function mount($id = null, $refreshAfterAction = false)
     {
         $this->formTitle = strtoupper('DADOS DO(A) {{ entityPtBr }}');
         $this->entity = '{{ entity }}';
         $this->pageTitle = '{{ entityPtBr }}';
+
+        $this->refreshAfterAction = $refreshAfterAction;
 
         if (isset($id)) {
             $this->method = 'update';

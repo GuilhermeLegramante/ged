@@ -16,6 +16,8 @@ class UserFormModal extends Component
     public $method = 'store';
     public $formTitle;
 
+    public $refreshAfterAction = false;
+
     protected $repositoryClass = 'App\Repositories\UserRepository';
 
     public $name;
@@ -78,11 +80,13 @@ class UserFormModal extends Component
         }
     }
 
-    public function mount($id = null)
+    public function mount($id = null, $refreshAfterAction = false)
     {
         $this->formTitle = strtoupper('DADOS DO(A) Usuário');
         $this->entity = 'user';
         $this->pageTitle = 'Usuário';
+
+        $this->refreshAfterAction = $refreshAfterAction;
 
         if (isset($id)) {
             $this->method = 'update';

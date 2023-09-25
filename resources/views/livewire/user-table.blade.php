@@ -1,7 +1,7 @@
 <div>
     @include('pages.datatable')
 
-    @livewire('user-form-modal')
+    @livewire('user-form-modal', [null, true])
 </div>
 @push('scripts')
 <script>

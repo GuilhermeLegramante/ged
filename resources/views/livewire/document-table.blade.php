@@ -1,7 +1,7 @@
 <div>
     @include('pages.datatable')
 
-    @livewire('document-form-modal')
+    @livewire('document-form-modal', [null, true])
 
     @livewire('document-type-form-modal')
 

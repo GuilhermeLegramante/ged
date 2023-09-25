@@ -16,6 +16,8 @@ class DocumentTypeFormModal extends Component
     public $method = 'store';
     public $formTitle;
 
+    public $refreshAfterAction = false;
+
     protected $repositoryClass = 'App\Repositories\DocumentTypeRepository';
 
     public $description;
@@ -23,12 +25,12 @@ class DocumentTypeFormModal extends Component
     protected $inputs = [
         [
             'field' => 'recordId',
-            'edit' => true
+            'edit' => true,
         ],
         [
             'field' => 'description',
             'edit' => true,
-            'type' => 'string'
+            'type' => 'string',
         ],
     ];
 
@@ -68,11 +70,13 @@ class DocumentTypeFormModal extends Component
         }
     }
 
-    public function mount($id = null)
+    public function mount($id = null, $refreshAfterAction = false)
     {
         $this->formTitle = strtoupper('DADOS DO(A) Tipo de Documento');
         $this->entity = 'document-type';
         $this->pageTitle = 'Tipo de Documento';
+
+        $this->refreshAfterAction = $refreshAfterAction;
 
         if (isset($id)) {
             $this->method = 'update';

@@ -3,6 +3,10 @@
 </div>
 @push('scripts')
 <script>
+    window.livewire.on('show{{ entityUcFirst }}FormModal', () => {
+        $('#{{ entity }}-form-modal').modal('show');
+    });
+
     window.livewire.on('hide{{ entityUcFirst }}FormModal', () => {
         $('#{{ entity }}-form-modal').modal('hide');
     });

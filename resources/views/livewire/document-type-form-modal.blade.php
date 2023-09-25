@@ -3,8 +3,13 @@
 </div>
 @push('scripts')
 <script>
-    window.livewire.on('hideDemandFormModal', () => {
-        $('#{{ $entity }}-form-modal').modal('hide');
+    window.livewire.on('showDocumentTypeFormModal', () => {
+        $('#document-type-form-modal').modal('show');
     });
+
+    window.livewire.on('hideDocumentTypeFormModal', () => {
+        $('#document-type-form-modal').modal('hide');
+    });
+
 </script>
 @endpush

@@ -1,7 +1,7 @@
 <div>
     @include('pages.datatable')
 
-    @livewire('person-form-modal')
+    @livewire('person-form-modal', [null, true])
 </div>
 @push('scripts')
 <script>
@@ -16,5 +16,6 @@
     window.livewire.on('scrollTop', () => {
         $(window).scrollTop(0);
     });
+
 </script>
 @endpush
