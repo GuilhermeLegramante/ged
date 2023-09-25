@@ -9,6 +9,7 @@ class MainController extends Controller
 {
     public function dashboard()
     {
-        return view('dashboard');
+        // return view('dashboard');
+        return redirect()->route('document.table');
     }
 }
