@@ -53,6 +53,18 @@ class DocumentTable extends Component
             'visible' => 'true',
         ],
         [
+            'field' => 'validityStart',
+            'label' => 'Início da Vigência',
+            'css' => 'w-10',
+            'visible' => 'true',
+        ],
+        [
+            'field' => 'validityEnd',
+            'label' => 'Fim da Vigência',
+            'css' => 'w-10',
+            'visible' => 'true',
+        ],
+        [
             'field' => 'createdAt',
             'label' => 'Incluído em',
             'css' => 'w-10',
@@ -103,6 +115,20 @@ class DocumentTable extends Component
         ],
         [
             'field' => 'date',
+            'type' => 'date',
+            'css' => 'pl-12px',
+            'visible' => 'true',
+            'editable' => 'true',
+        ],
+        [
+            'field' => 'validityStart',
+            'type' => 'date',
+            'css' => 'pl-12px',
+            'visible' => 'true',
+            'editable' => 'true',
+        ],
+        [
+            'field' => 'validityEnd',
             'type' => 'date',
             'css' => 'pl-12px',
             'visible' => 'true',
