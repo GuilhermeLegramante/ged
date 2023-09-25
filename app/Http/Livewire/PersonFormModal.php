@@ -63,7 +63,7 @@ class PersonFormModal extends Component
     {
         return [
             'name' => ['required'],
-            'document' => ['required'],
+            // 'document' => ['required'],
         ];
     }
 

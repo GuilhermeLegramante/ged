@@ -8,7 +8,7 @@
 <div class="row">
     @include('partials.inputs.text', [
     'columnSize' => 12,
-    'label' => 'Documento (CPF ou CNPJ)*',
+    'label' => 'Documento (CPF ou CNPJ)',
     'model' => 'document',
     ])
 </div>

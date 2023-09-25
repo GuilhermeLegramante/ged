@@ -17,7 +17,7 @@ class PersonRepository
     public function __construct()
     {
         $this->baseQuery = DB::table($this->table)
-            ->join('personal_documents', 'personal_documents.person_id', '=', 'persons.id')
+            ->leftJoin('personal_documents', 'personal_documents.person_id', '=', 'persons.id')
             ->select(
                 $this->table . '.id AS id',
                 $this->table . '.name AS description',
@@ -74,15 +74,17 @@ class PersonRepository
                 ]
             );
 
-        DB::table('personal_documents')
-            ->insert(
-                [
-                    'user_id' => session()->get('userId'),
-                    'person_id' => $registerId,
-                    'number' => $data['document'],
-                    'created_at' => now(),
-                ]
-            );
+        if (isset($data['document'])) {
+            DB::table('personal_documents')
+                ->insert(
+                    [
+                        'user_id' => session()->get('userId'),
+                        'person_id' => $registerId,
+                        'number' => $data['document'],
+                        'created_at' => now(),
+                    ]
+                );
+        }
 
         return $registerId;
     }
@@ -112,19 +114,22 @@ class PersonRepository
                 ]
             );
 
-        DB::table('personal_documents')
-            ->where('person_id', $data['recordId'])
-            ->delete();
+        if (isset($data['document'])) {
+            DB::table('personal_documents')
+                ->where('person_id', $data['recordId'])
+                ->delete();
 
-        DB::table('personal_documents')
-            ->insert(
-                [
-                    'user_id' => session()->get('userId'),
-                    'person_id' => $data['recordId'],
-                    'number' => $data['document'],
-                    'created_at' => now(),
-                ]
-            );
+            DB::table('personal_documents')
+                ->insert(
+                    [
+                        'user_id' => session()->get('userId'),
+                        'person_id' => $data['recordId'],
+                        'number' => $data['document'],
+                        'created_at' => now(),
+                    ]
+                );
+        }
+
     }
 
     public function delete($data)
