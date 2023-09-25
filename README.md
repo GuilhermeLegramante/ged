@@ -8,5 +8,6 @@
 - 1.1.0 (25/09/2023) :
     - Removendo obrigatoriedade do documento no cadastro da pessoa
     - Validação para evitar duplicações no campo de seleção de pessoas no cadastro de documento
+    - Refresh na página após ação nas modais dentro dos datatables
 
 <hr>
