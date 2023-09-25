@@ -9,5 +9,6 @@
     - Removendo obrigatoriedade do documento no cadastro da pessoa
     - Validação para evitar duplicações no campo de seleção de pessoas no cadastro de documento
     - Refresh na página após ação nas modais dentro dos datatables
+    - Tela de documentos no lugar do dashboard
 
 <hr>
