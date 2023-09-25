@@ -5,5 +5,6 @@
 ## 💻 Resumo das Versões
 
 - 1.0.0 (15/09/2023) - Cadastro de Documento
+- 1.1.0 (25/09/2023) - Removendo obrigatoriedade do documento no cadastro da pessoa
 
 <hr>

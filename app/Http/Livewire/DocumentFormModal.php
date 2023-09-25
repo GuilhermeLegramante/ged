@@ -197,7 +197,16 @@ class DocumentFormModal extends Component
 
     public function setPersons()
     {
-        array_push($this->persons, ['id' => $this->personId, 'description' => $this->personDescription]);
+        // Variável para verificar se a pessoa já foi adicionada, para evitar duplicações
+        $personAlreadyInArray = false;
+
+        foreach ($this->persons as $person) {
+            ($person['id'] == $this->personId) ? $personAlreadyInArray = true : '';
+        }
+
+        if ($personAlreadyInArray == false) {
+            array_push($this->persons, ['id' => $this->personId, 'description' => $this->personDescription]);
+        }
     }
 
     public function removePerson($key)
