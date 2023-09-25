@@ -53,9 +53,19 @@
 </div>
 <div class="row">
     @include('partials.inputs.date', [
-    'columnSize' => 12,
+    'columnSize' => 4,
     'label' => 'Data do Documento',
     'model' => 'date',
+    ])
+    @include('partials.inputs.date', [
+    'columnSize' => 4,
+    'label' => 'Início da Vigência',
+    'model' => 'validityStart',
+    ])
+    @include('partials.inputs.date', [
+    'columnSize' => 4,
+    'label' => 'Fim da Vigência',
+    'model' => 'validityEnd',
     ])
 </div>
 <div class="row">

@@ -31,6 +31,8 @@ class DocumentFormModal extends Component
     public $number;
     public $date;
     public $persons = [];
+    public $validityStart;
+    public $validityEnd;
 
     public $storedFilePath;
     public $storedFilename;
@@ -75,6 +77,14 @@ class DocumentFormModal extends Component
             'field' => 'persons',
             'edit' => true,
         ],
+        [
+            'field' => 'validityStart',
+            'edit' => true,
+        ],
+        [
+            'field' => 'validityEnd',
+            'edit' => true,
+        ],
     ];
 
     protected $listeners = [
@@ -88,6 +98,8 @@ class DocumentFormModal extends Component
         'documentTypeId' => 'Tipo de Documento',
         'file' => 'Arquivo',
         'personId' => 'Pessoa',
+        'validityStart' => 'Início da Vigência',
+        'validityEnd' => 'Fim da Vigência',
     ];
 
     public function rules()
@@ -155,6 +167,10 @@ class DocumentFormModal extends Component
         $this->storedFilePath = $data->path;
 
         $this->storedFilename = $data->filename;
+
+        $this->validityStart = $data->validityStart;
+
+        $this->validityEnd = $data->validityEnd;
 
         if (isset($data->documentTypeId)) {
             $this->selectDocumentType($data->documentTypeId);

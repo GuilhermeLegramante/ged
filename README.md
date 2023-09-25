@@ -10,5 +10,5 @@
     - Validação para evitar duplicações no campo de seleção de pessoas no cadastro de documento
     - Refresh na página após ação nas modais dentro dos datatables
     - Tela de documentos no lugar do dashboard
-
+    - Add colunas de início e fim de vigência do documento
 <hr>
