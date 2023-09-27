@@ -16,7 +16,7 @@
                 @if($item->id == $fieldIdInEdition && $column['field'] == $columnNameInEdition && $column['editable'] == 'true')
                 <input class="form-control input-custom" type="text" wire:model.lazy='valueInEdition'>
                 @else
-                {{ $item->{$column['field']} }}
+                {!! Str::words($item->{$column['field']}, 10, ' ...') !!}
                 @endif
             </div>
             @break
