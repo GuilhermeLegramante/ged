@@ -34,18 +34,19 @@ class DocumentRepository
                 'document_types.description AS documentTypeDescription',
                 $this->table . '.created_at AS createdAt',
                 $this->table . '.updated_at AS updatedAt',
+                DB::raw('(SELECT GROUP_CONCAT(tag) FROM document_tags WHERE document_id = documents.id) AS tags'),
+                DB::raw('(SELECT GROUP_CONCAT(persons.name) FROM `document_persons` INNER JOIN persons ON document_persons.person_id = persons.id
+                             WHERE document_id = documents.id) AS persons')
             );
     }
 
     public function all(string $search = null, string $sortBy = 'id', string $sortDirection = 'asc', string $perPage = '30')
     {
         return $this->baseQuery
-            ->where([
-                [$this->table . '.id', 'like', '%' . $search . '%'],
-            ])
-            ->orWhere([
-                [$this->table . '.note', 'like', '%' . $search . '%'],
-            ])
+            ->having($this->table . '.id', 'like', '%' . $search . '%')
+            ->orHaving($this->table . '.note', 'like', '%' . $search . '%')
+            ->orHavingRaw('tags like ?', ['%' . $search . '%'])
+            ->orHavingRaw('persons like ?', ['%' . $search . '%'])
             ->orderBy($sortBy, $sortDirection)
             ->paginate($perPage);
     }

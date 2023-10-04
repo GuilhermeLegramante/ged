@@ -16,7 +16,7 @@ class DocumentTable extends Component
     public $entity;
     public $pageTitle;
     public $icon = 'fas fa-file-alt';
-    public $searchFieldsLabel = 'Código ou Descrição';
+    public $searchFieldsLabel = 'Código, Descrição, TAG ou Pessoa Relacionada';
     public $hasForm = true;
     public $formModalEmitMethod = 'showDocumentFormModal';
     public $formType = 'modal';
