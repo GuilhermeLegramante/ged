@@ -112,7 +112,19 @@ class DocumentFormModal extends Component
 
     public function showDocumentFormModal($id = null)
     {
-        $this->reset('recordId', 'note', 'file', 'number', 'date', 'tags', 'persons');
+        $this->reset(
+            'recordId',
+            'note',
+            'documentTypeId',
+            'documentTypeDescription',
+            'file',
+            'number',
+            'date',
+            'tags',
+            'persons',
+            'storedFilePath',
+            'storedFilename'
+        );
 
         $this->resetValidation();
 
