@@ -43,7 +43,6 @@ class PersonRepository
                 ['personal_documents.number', 'like', '%' . $search . '%'],
             ])
             ->orderBy($sortBy, $sortDirection)
-            ->groupBy('personal_documents.id')
             ->paginate($perPage);
     }
 
