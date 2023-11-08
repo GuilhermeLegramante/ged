@@ -247,4 +247,16 @@ class DocumentRepository
                 );
         }
     }
+
+    public function totalDocumentsByFilter($users = [], $initialDate, $finalDate)
+    {
+        $query = DB::table('documents')
+            ->whereBetween('created_at', [$initialDate, $finalDate]);
+
+        if (count($users) > 0) {
+            $query = $query->whereIn('user_id', $users);
+        }
+
+        return $query->count();
+    }
 }

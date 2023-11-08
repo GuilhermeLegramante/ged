@@ -30,8 +30,8 @@ Route::group(['middleware' => ['auth']], function () {
      * ReportController => Emite o pdf
      */
     Route::prefix('/relatorio')->group(function () {
-        Route::get('/filtro/livro-de-marcas', 'ReportFilterController@productivityResume')->name('report.filter.productivityResume');
-        Route::get('/livro-de-marcas', 'ReportController@productivityResume')->name('report.productivityResume');
+        Route::get('/filtro/resumo-de-produtividade', 'ReportFilterController@productivityResume')->name('report.filter.productivityResume');
+        Route::get('/resumo-de-produtividade', 'ReportController@productivityResume')->name('report.productivityResume');
     });
 
 });

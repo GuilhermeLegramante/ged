@@ -254,7 +254,7 @@ return [
                     'text' => 'Resumo de Produtividade',
                     'icon' => 'nav-icon fas fa-file-alt',
                     'url' => '/relatorio/filtro/resumo-de-produtividade',
-                    'active' => ['/relatorio/resumo-de-produtividade/*'],
+                    'active' => ['/relatorio/filtro/resumo-de-produtividade/*'],
                 ],
             ],
         ],

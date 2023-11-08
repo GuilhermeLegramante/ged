@@ -26,13 +26,15 @@ class MpdfReport {
         ini_set('max_execution_time', '300');
         ini_set("pcre.backtrack_limit", "50000000");
 
-        $repository = new ClientRepository();
+        // $repository = new ClientRepository();
 
-        $client = $repository->findById(1);
+        // $client = $repository->findById(1);
 
         $this->data = $data;
 
-        $this->data['client'] = $client;
+        // $this->data['client'] = $client;
+
+        $this->data['client'] = '';
 
         $this->data['title'] = $title;
 

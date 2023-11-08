@@ -19,6 +19,7 @@ class UserRepository
         $this->baseQuery = DB::table($this->table)
             ->select(
                 $this->table . '.id AS id',
+                $this->table . '.id AS code',
                 $this->table . '.name AS name',
                 $this->table . '.name AS description',
                 $this->table . '.login AS login',
