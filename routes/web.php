@@ -25,4 +25,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', 'UserController@table')->name('user.table');
     });
 
+    /**
+     * ReportFilterController => Chama as views dos filtros
+     * ReportController => Emite o pdf
+     */
+    Route::prefix('/relatorio')->group(function () {
+        Route::get('/filtro/livro-de-marcas', 'ReportFilterController@productivityResume')->name('report.filter.productivityResume');
+        Route::get('/livro-de-marcas', 'ReportController@productivityResume')->name('report.productivityResume');
+    });
+
 });
