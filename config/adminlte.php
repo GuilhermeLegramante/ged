@@ -247,6 +247,18 @@ return [
             ],
         ],
         [
+            'text' => 'Relatórios',
+            'icon' => 'nav-icon fas fa-file-pdf',
+            'submenu' => [
+                [
+                    'text' => 'Resumo de Produtividade',
+                    'icon' => 'nav-icon fas fa-file-alt',
+                    'url' => '/relatorio/filtro/resumo-de-produtividade',
+                    'active' => ['/relatorio/resumo-de-produtividade/*'],
+                ],
+            ],
+        ],
+        [
             'text' => 'Sair',
             'url' => '/sair',
             'icon' => 'nav-icon fas fa-sign-out-alt',
