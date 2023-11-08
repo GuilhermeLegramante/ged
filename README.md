@@ -11,4 +11,6 @@
     - Refresh na página após ação nas modais dentro dos datatables
     - Tela de documentos no lugar do dashboard
     - Add colunas de início e fim de vigência do documento
+- 1.2.0 (08/11/2023) :
+    - Relatório de Registro de Produtividade
 <hr>
