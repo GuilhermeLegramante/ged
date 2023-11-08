@@ -91,5 +91,7 @@ class ProductivityResumeFilter extends Component
         $repository = new DocumentRepository();
 
         $this->totalDocuments = $repository->totalDocumentsByFilter(array_keys($this->selectedUsers), $this->initialDate, $this->finalDate);
+
+        $this->showDataReport = true;
     }
 }

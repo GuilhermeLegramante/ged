@@ -60,6 +60,7 @@
 ],
 ])
 
+@if($showDataReport)
 <div class="card card-primary card-outline mt-1">
     <div class="card-header" data-card-widget="collapse">
         <div class="row mt-1">
@@ -88,6 +89,7 @@
         </div>
     </div>
 </div>
+@endif
 
 @include('partials.cards.generate-report-button')
 @endsection

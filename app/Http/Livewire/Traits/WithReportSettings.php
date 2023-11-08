@@ -6,4 +6,5 @@ trait WithReportSettings
 {
     public $hasPreviewData = true;
     public $hasPdfReport = true;
+    public $showDataReport = false;
 }

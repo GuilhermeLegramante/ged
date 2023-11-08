@@ -26,6 +26,8 @@ trait WithUserFilter
     {
         $this->selectedUsers = array_filter($this->selectedUsers);
         $this->checkAllUsers = sizeof($this->selectedUsers) == sizeof($this->users) ? true : false;
+
+        $this->showDataReport = false;
     }
 
     public function updatedCheckAllUsers()
@@ -37,6 +39,8 @@ trait WithUserFilter
         } else {
             $this->selectedUsers = [];
         }
+
+        $this->showDataReport = false;
     }
 
     public function updatedUsersSearch()
