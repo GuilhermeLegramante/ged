@@ -117,7 +117,7 @@
                             {{ $item['number'] }}
                         </td>
                         <td class="pl-12px">
-                            {!! Str::words($item['description']}, 10, ' ...') !!}
+                            {!! Str::words($item['description']), 10, ' ...') !!}
                         </td>
                         <td class="text-center align-middle">
                             {{ date('d/m/Y H:i:s', strtotime($item['createdAt']) ) }}
