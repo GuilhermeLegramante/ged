@@ -15,6 +15,7 @@ trait WithUserFilter
     public $usersSortBy = 'id';
     public $usersSortDirection = 'asc';
     public $showUsersFilter = true;
+    public $groupReportByUser = false;
 
     public function usersSortBy($field)
     {

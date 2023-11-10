@@ -28,6 +28,11 @@
         'method' => 'showUsersFilter'
         ])
 
+        @include('partials.filters.checkbox', [
+        'label' => 'AGRUPAR POR USUÁRIO',
+        'method' => 'groupReportByUser'
+        ])
+
         @include('partials.cards.show-resume-filter')
     </div>
 </div>
@@ -76,18 +81,115 @@
         </div>
     </div>
 
+    @if ($groupReportByUser)
     <div class="card-body">
+        @foreach ($reportData as $key => $value)
         <div class="table-responsive">
             <table class="table-bordered table-striped pd-10px w-100">
                 <tbody>
                     <tr>
-                        <th class="p-1">Total de Documentos Cadastrados</th>
-                        <td class="p-1">{{ $totalDocuments }}</td>
+                        <th class="p-1">Usuário</th>
+                        <td class="p-1">{{ $key }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="table-responsive">
+            <table class="pd-dot3r table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center w-10">
+                            Número
+                        </th>
+                        <th class="w-70">
+                            Descrição
+                        </th>
+                        <th class="text-center w-15">
+                            Data de Inclusão
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($value as $item)
+                    <tr>
+                        <td class="text-center align-middle">
+                            {{ $item['number'] }}
+                        </td>
+                        <td class="pl-12px">
+                            {{ $item['description'] }}
+                        </td>
+                        <td class="text-center align-middle">
+                            {{ date('d/m/Y H:i:s', strtotime($item['createdAt']) ) }}
+                        </td>
+                    </tr>
+                    @endforeach
+                    <tr>
+                        <td class="text-right" colspan="2">
+                            <strong>Total de Documentos Cadastrados</strong>
+                        </td>
+                        <td class="text-center align-middle">
+                            <strong>{{ count($value) }}</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        @endforeach
+    </div>
+    @else
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="pd-dot3r table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center w-10">
+                            Número
+                        </th>
+                        <th class="w-70">
+                            Descrição
+                        </th>
+                        <th class="text-center w-15">
+                            Data de Inclusão
+                        </th>
+                        <th class="text-center w-20">
+                            Usuário
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($reportData as $item)
+                    <tr>
+                        <td class="text-center align-middle">
+                            {{ $item['number'] }}
+                        </td>
+                        <td class="pl-12px">
+                            {{ $item['description'] }}
+                        </td>
+                        <td class="text-center align-middle">
+                            {{ date('d/m/Y H:i:s', strtotime($item['createdAt']) ) }}
+                        </td>
+                        <td class="text-center align-middle">
+                            {{ $item['username'] }}
+                        </td>
+                    </tr>
+                    @endforeach
+                    <tr>
+                        <td class="text-right" colspan="3">
+                            <strong>Total de Documentos Cadastrados</strong>
+                        </td>
+                        <td class="text-center align-middle">
+                            <strong>{{ count($reportData) }}</strong>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    @endif
+
+
 </div>
 @endif
 

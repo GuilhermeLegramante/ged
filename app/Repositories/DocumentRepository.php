@@ -259,4 +259,5 @@ class DocumentRepository
 
         return $query->count();
     }
+
 }

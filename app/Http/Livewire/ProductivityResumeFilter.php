@@ -6,7 +6,7 @@ use App\Http\Livewire\Traits\WithFilter;
 use App\Http\Livewire\Traits\WithReportSettings;
 use App\Http\Livewire\Traits\WithUserFilter;
 use App\Http\Livewire\Traits\WithVerticalPagination;
-use App\Repositories\DocumentRepository;
+use App\Repositories\ProductivityResumeRepository;
 use App\Repositories\UserRepository;
 use App\Services\ArrayHandler;
 use App\Services\SessionService;
@@ -27,6 +27,8 @@ class ProductivityResumeFilter extends Component
     public $finalDate = null;
 
     public $totalDocuments = 0;
+
+    public $reportData = [];
 
     protected $validationAttributes = [
         'finalDate' => 'Data Final',
@@ -88,10 +90,22 @@ class ProductivityResumeFilter extends Component
 
     public function viewData()
     {
-        $repository = new DocumentRepository();
+        $initialDate = $this->initialDate . ' 23:59:59';
+        $finalDate = $this->finalDate . ' 23:59:59';
 
-        $this->totalDocuments = $repository->totalDocumentsByFilter(array_keys($this->selectedUsers), $this->initialDate, $this->finalDate);
+        $repository = new ProductivityResumeRepository();
+
+        $data = $repository->getReportData(array_keys($this->selectedUsers), $initialDate, $finalDate, $this->groupReportByUser);
+
+        $this->reportData = ArrayHandler::jsonDecodeEncode($data);
 
         $this->showDataReport = true;
+    }
+
+    public function updatedGroupReportByUser()
+    {
+        $this->viewData();
+
+        $this->showDataReport = false;
     }
 }
