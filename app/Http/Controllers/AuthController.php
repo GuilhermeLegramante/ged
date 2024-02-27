@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use DB;
 use Illuminate\Support\Facades\Session;
+use PDF;
+use setasign\Fpdi\Fpdi;
 
 class AuthController extends Controller
 {
@@ -54,5 +56,19 @@ class AuthController extends Controller
         return redirect()
             ->route('login')
             ->with('success', 'Log out realizado com sucesso!');
+    }
+
+    public function countPages()
+    {
+        // $file = readfile('https://hardsoft.s3.sa-east-1.amazonaws.com/_ged/cacequicm/documentos/t7bl_Contrato%20GED%20Cacequi%20CM.pdf');
+
+        // $number = preg_match_all("/\/Page\W/", $file, $dummy);
+        // dd('$number');
+
+        // dd($file);
+
+        // $pdf = PDF::loadFile($file);
+
+        // dd($pdf);
     }
 }
