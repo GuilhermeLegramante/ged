@@ -13,4 +13,6 @@
     - Add colunas de início e fim de vigência do documento
 - 1.2.0 (08/11/2023) :
     - Relatório de Registro de Produtividade
+- 1.2.1 (27/02/2024) :
+    - Aumentando o limite de upload
 <hr>
