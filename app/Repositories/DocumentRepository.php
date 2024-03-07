@@ -45,6 +45,7 @@ class DocumentRepository
         return $this->baseQuery
             ->having($this->table . '.id', 'like', '%' . $search . '%')
             ->orHaving($this->table . '.note', 'like', '%' . $search . '%')
+            ->orHaving($this->table . '.number', 'like', '%' . $search . '%')
             ->orHavingRaw('tags like ?', ['%' . $search . '%'])
             ->orHavingRaw('persons like ?', ['%' . $search . '%'])
             ->orderBy($sortBy, $sortDirection)
