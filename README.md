@@ -15,4 +15,6 @@
     - Relatório de Registro de Produtividade
 - 1.2.1 (27/02/2024) :
     - Aumentando o limite de upload
+- 1.3.0 (07/03/2024) :
+    - Acrescentando busca pelo número
 <hr>
