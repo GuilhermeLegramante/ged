@@ -29,6 +29,12 @@ class DocumentTable extends Component
             'visible' => true,
         ],
         [
+            'field' => 'number',
+            'label' => 'Número',
+            'css' => 'w-10',
+            'visible' => true,
+        ],
+        [
             'field' => 'note',
             'label' => 'Descrição',
             'css' => 'w-40',
@@ -38,12 +44,6 @@ class DocumentTable extends Component
             'field' => 'path',
             'label' => 'Arquivo',
             'css' => 'w-40',
-            'visible' => true,
-        ],
-        [
-            'field' => 'number',
-            'label' => 'Número',
-            'css' => 'w-10',
             'visible' => true,
         ],
         [
@@ -93,6 +93,13 @@ class DocumentTable extends Component
             'editable' => 'false',
         ],
         [
+            'field' => 'number',
+            'type' => 'string',
+            'css' => 'pl-12px',
+            'visible' => true,
+            'editable' => true,
+        ],
+        [
             'field' => 'note',
             'type' => 'string',
             'css' => 'pl-12px',
@@ -106,13 +113,7 @@ class DocumentTable extends Component
             'visible' => true,
             'editable' => 'false',
         ],
-        [
-            'field' => 'number',
-            'type' => 'string',
-            'css' => 'pl-12px',
-            'visible' => true,
-            'editable' => true,
-        ],
+
         [
             'field' => 'date',
             'type' => 'date',
