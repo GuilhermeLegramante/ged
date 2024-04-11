@@ -52,6 +52,70 @@ class DocumentRepository
             ->paginate($perPage);
     }
 
+    public function allWithFilter(array $filter = [], string $sortBy = 'id', string $sortDirection = 'asc', string $perPage = '30')
+    {
+        $query = DB::table($this->table)
+            ->leftJoin('document_types', 'document_types.id', '=', 'documents.document_type_id')
+            ->select(
+                $this->table . '.id AS id',
+                $this->table . '.note AS description',
+                $this->table . '.note AS note',
+                $this->table . '.number AS number',
+                $this->table . '.date AS date',
+                $this->table . '.path AS path',
+                $this->table . '.filename AS filename',
+                $this->table . '.validity_start AS validityStart',
+                $this->table . '.validity_end AS validityEnd',
+                'document_types.id AS documentTypeId',
+                'document_types.description AS documentTypeDescription',
+                $this->table . '.created_at AS createdAt',
+                $this->table . '.updated_at AS updatedAt',
+                DB::raw('(SELECT GROUP_CONCAT(tag) FROM document_tags WHERE document_id = documents.id) AS tags'),
+                DB::raw('(SELECT GROUP_CONCAT(persons.name) FROM `document_persons` INNER JOIN persons ON document_persons.person_id = persons.id
+                             WHERE document_id = documents.id) AS persons')
+            );
+
+        $query = $query->having($this->table . '.note', 'like', '%' . $filter['note'] . '%');
+
+        if (isset($filter['number'])) {
+            $query = $query->having($this->table . '.number', 'like', '%' . $filter['number'] . '%');
+        }
+
+        if (isset($filter['date'])) {
+            $query = $query->having($this->table . '.date', 'like', '%' . $filter['date'] . '%');
+        }
+
+        if (isset($filter['validityStart'])) {
+            $query = $query->having($this->table . '.validity_start', 'like', '%' . $filter['validityStart'] . '%');
+        }
+
+        if (isset($filter['validityEnd'])) {
+            $query = $query->having($this->table . '.validity_end', 'like', '%' . $filter['validityEnd'] . '%');
+        }
+
+        if (isset($filter['documentTypeId'])) {
+            $query = $query->having('document_types.id', 'like', '%' . $filter['documentTypeId'] . '%');
+        }
+
+        if (isset($filter['person'])) {
+            $query = $query->havingRaw('persons like ?', ['%' . $filter['person'] . '%']);
+        }
+
+        if (isset($filter['tags'])) {
+            $tag = '';
+
+            foreach ($filter['tags'] as $key => $value) {
+                $tag = $tag . ',' . $value;
+            }
+
+            $query = $query->havingRaw('tags like ?', ['%' . $tag . '%']);
+        }
+
+        return $query
+            ->orderBy($sortBy, $sortDirection)
+            ->paginate($perPage);
+    }
+
     public function allSimplified()
     {
         return $this->baseQuery->get();
@@ -260,5 +324,4 @@ class DocumentRepository
 
         return $query->count();
     }
-
 }

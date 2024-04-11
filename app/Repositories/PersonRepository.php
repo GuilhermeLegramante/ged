@@ -27,7 +27,7 @@ class PersonRepository
                 'personal_documents.number AS personalDocumentNumber',
                 $this->table . '.created_at AS createdAt',
                 $this->table . '.updated_at AS updatedAt',
-            );
+            )->groupBy('name');
     }
 
     public function all(string $search = null, string $sortBy = 'id', string $sortDirection = 'asc', string $perPage = '30')
@@ -128,7 +128,6 @@ class PersonRepository
                     ]
                 );
         }
-
     }
 
     public function delete($data)

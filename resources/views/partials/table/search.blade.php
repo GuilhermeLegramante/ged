@@ -9,6 +9,11 @@
                     <button class="single-search-btn btn btn-primary" type="button" title="Incluir Registro" wire:click="$emit('{{ $addMethod }}')" {{ isset($disabled) ? ($disabled ? 'disabled' : '') : '' }}><i class="fas fa-plus"></i></button>
                 </span>
                 @endif
+                @if(isset($hasTableFilters) && $hasTableFilters == true)
+                <span class="input-group-append">
+                    <button class="single-search-btn btn btn-primary" type="button" title="Filtros" wire:click="$emit('{{ $tableFiltersModalEmit }}')"><i class="fas fa-filter"></i></button>
+                </span>
+                @endif
             </div>
         </div>
     </div>

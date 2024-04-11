@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Http\Livewire\Components\Button;
+use App\Http\Livewire\Traits\Selects\WithDocumentTypeSelect;
+use App\Http\Livewire\Traits\Selects\WithPersonSelect;
 use App\Http\Livewire\Traits\WithDatatable;
 use App\Services\SessionService;
 use Illuminate\Support\Facades\App;
@@ -11,7 +13,7 @@ use Livewire\WithPagination;
 
 class DocumentTable extends Component
 {
-    use WithDatatable, WithPagination;
+    use WithDatatable, WithPagination, WithDocumentTypeSelect, WithPersonSelect;
 
     public $entity;
     public $pageTitle;
@@ -20,6 +22,21 @@ class DocumentTable extends Component
     public $hasForm = true;
     public $formModalEmitMethod = 'showDocumentFormModal';
     public $formType = 'modal';
+
+    public $hasTableFilters = true;
+    public $tableFiltersModalEmit = 'showDocumentFilterModal';
+
+    public $persons = [];
+    public $tags = [];
+    public $filters = [];
+    public $inputs = [];
+    public $tag;
+    public $note;
+    public $number;
+    public $date;
+    public $validityStart;
+    public $validityEnd;
+
 
     public $headerColumns = [
         [
@@ -153,6 +170,11 @@ class DocumentTable extends Component
 
     protected $repositoryClass = 'App\Repositories\DocumentRepository';
 
+    protected $listeners = [
+        'selectDocumentType',
+        'selectPerson',
+    ];
+
     public function mount()
     {
         $this->entity = 'document';
@@ -177,6 +199,10 @@ class DocumentTable extends Component
 
         $data = $repository->all($this->search, $this->sortBy, $this->sortDirection, $this->perPage);
 
+        if (count($this->filters) > 0) {
+            $data = $repository->allWithFilter($this->filters, $this->sortBy, $this->sortDirection, $this->perPage);
+        }
+
         if ($data->total() == $data->lastItem()) {
             $this->emit('scrollTop');
         }
@@ -184,5 +210,51 @@ class DocumentTable extends Component
         $buttons = $this->rowButtons();
 
         return view('livewire.document-table', compact('data', 'buttons'));
+    }
+
+    public function setFilters()
+    {
+        $this->filters = [
+            'note' => $this->note,
+            'number' => $this->number,
+            'date' => $this->date,
+            'validityStart' => $this->validityStart,
+            'validityEnd' => $this->validityEnd,
+            'documentTypeId' => $this->documentTypeId,
+            'person' => $this->personDescription,
+            'tags' => $this->tags,
+        ];
+
+        $this->render();
+    }
+
+    public function setPersons()
+    {
+        // Variável para verificar se a pessoa já foi adicionada, para evitar duplicações
+        $personAlreadyInArray = false;
+
+        foreach ($this->persons as $person) {
+            ($person['id'] == $this->personId) ? $personAlreadyInArray = true : '';
+        }
+
+        if ($personAlreadyInArray == false) {
+            array_push($this->persons, ['id' => $this->personId, 'description' => $this->personDescription]);
+        }
+    }
+
+    public function removePerson($key)
+    {
+        unset($this->persons[$key]);
+    }
+
+    public function updatedTag()
+    {
+        array_push($this->tags, $this->tag);
+        $this->tag = '';
+    }
+
+    public function removeTag($key)
+    {
+        unset($this->tags[$key]);
     }
 }

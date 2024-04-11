@@ -1,9 +1,15 @@
 <div>
     @include('pages.datatable')
 
+    @include('partials.modals.document-filter')
+
     @livewire('document-form-modal', [null, true])
 
     @livewire('document-type-form-modal')
+
+    @livewire('document-type-select')
+
+    @livewire('person-select')
 
 </div>
 @push('scripts')
@@ -26,6 +32,24 @@
 
     window.livewire.on('scrollTop', () => {
         $(window).scrollTop(0);
+    });
+
+    window.livewire.on('showDocumentFilterModal', () => {
+        $('#document-filter-modal').modal('show');
+    });
+
+    window.livewire.on('hideDocumentFilterModal', () => {
+        $('#document-filter-modal').modal('hide');
+    });
+
+    window.livewire.on('showDocumentTypeSelectModal', () => {
+        $('#modal-select-document-type').modal('show');
+        Livewire.emit('documentTypeSelectModal');
+    });
+
+    window.livewire.on('showPersonSelectModal', () => {
+        $('#modal-select-person').modal('show');
+        Livewire.emit('personSelectModal');
     });
 
 </script>
