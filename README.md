@@ -17,4 +17,6 @@
     - Aumentando o limite de upload
 - 1.3.0 (07/03/2024) :
     - Acrescentando busca pelo número
+- 1.4.0 (11/04/2024):
+    - Filtros na listagem de documentos
 <hr>
