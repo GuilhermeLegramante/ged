@@ -60,7 +60,7 @@
                 <div class="row">
                     @include('partials.inputs.select-modal', [
                     'columnSize' => 12,
-                    'label' => 'Pessoa(s) Relacionada(s)',
+                    'label' => 'Pessoa Relacionada',
                     'method' => 'showPersonSelectModal',
                     'model' => 'personId',
                     'description' => $personDescription,
