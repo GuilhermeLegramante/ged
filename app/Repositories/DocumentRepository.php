@@ -94,7 +94,7 @@ class DocumentRepository
         }
 
         if (isset($filter['documentTypeId'])) {
-            $query = $query->having('document_types.id', 'like', '%' . $filter['documentTypeId'] . '%');
+            $query = $query->having('document_types.id', '=', $filter['documentTypeId']);
         }
 
         if (isset($filter['person'])) {
