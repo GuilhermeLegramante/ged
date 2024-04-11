@@ -257,4 +257,12 @@ class DocumentTable extends Component
     {
         unset($this->tags[$key]);
     }
+
+    public function cleanFields($fields)
+    {
+        if (strpos($fields, ',') !== false) {
+            $fields = explode(',', $fields);
+        }
+        $this->reset($fields);
+    }
 }
