@@ -28,6 +28,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', 'UserController@table')->name('user.table');
     });
 
+    Route::prefix('/pasta')->group(function () {
+        Route::get('/', 'FolderController@table')->name('folder.table');
+    });
+
     /**
      * ReportFilterController => Chama as views dos filtros
      * ReportController => Emite o pdf

@@ -272,6 +272,9 @@ class DocumentRepository
 
         $filename = Str::random(4) . '_' . $file->getClientOriginalName();
 
+        // Salva localmente o arquivo também
+        Storage::putFileAs($path, $file, $filename);
+
         return Storage::disk('s3')->putFileAs($path, $file, $filename);
     }
 

@@ -1,7 +1,6 @@
 <div>
     @include('pages.datatable')
 
-    // Params: id, refreshAfterAction
     @livewire('{{ entity }}-form-modal', [null, true])
 </div>
 @push('scripts')

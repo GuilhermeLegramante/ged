@@ -218,6 +218,12 @@ return [
                     'url' => '/documento',
                     'active' => ['documento/*'],
                 ],
+                // [
+                //     'text' => 'Pastas',
+                //     'icon' => 'nav-icon fas fa-folder',
+                //     'url' => '/pasta',
+                //     'active' => ['pasta/*'],
+                // ],
             ],
 
         ],
