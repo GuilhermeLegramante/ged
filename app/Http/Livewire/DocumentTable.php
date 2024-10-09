@@ -202,8 +202,6 @@ class DocumentTable extends Component
 
         $data = $repository->all($this->search, $this->sortBy, $this->sortDirection, $this->perPage);
 
-        dd($data);
-
         if (count($this->filters) > 0) {
             $data = $repository->allWithFilter($this->filters, $this->sortBy, $this->sortDirection, $this->perPage);
         }
@@ -213,6 +211,8 @@ class DocumentTable extends Component
         }
 
         $buttons = $this->rowButtons();
+
+        dd($data);
 
         return view('livewire.document-table', compact('data', 'buttons'));
     }
