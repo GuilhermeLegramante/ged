@@ -184,7 +184,6 @@ class DocumentTable extends Component
         $this->sortDirection = 'desc';
 
         SessionService::start();
-        dd('a');
     }
 
     public function rowButtons(): array
@@ -202,6 +201,8 @@ class DocumentTable extends Component
         $repository = App::make($this->repositoryClass);
 
         $data = $repository->all($this->search, $this->sortBy, $this->sortDirection, $this->perPage);
+
+        dd($data);
 
         if (count($this->filters) > 0) {
             $data = $repository->allWithFilter($this->filters, $this->sortBy, $this->sortDirection, $this->perPage);
