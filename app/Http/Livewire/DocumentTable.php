@@ -180,6 +180,9 @@ class DocumentTable extends Component
         $this->entity = 'document';
         $this->pageTitle = 'Documento';
 
+        $this->sortBy = 'id';
+        $this->sortDirection = 'desc';
+
         SessionService::start();
     }
 
