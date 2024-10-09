@@ -10,7 +10,6 @@
     "require": {
         "php": "^7.2.5",
         "asantibanez/livewire-calendar": "^2.1",
-        "asantibanez/livewire-charts": "^2.4",
         "aws/aws-sdk-php": "^3.229",
         "barryvdh/laravel-dompdf": "^0.8.6",
         "barryvdh/laravel-ide-helper": "*",
