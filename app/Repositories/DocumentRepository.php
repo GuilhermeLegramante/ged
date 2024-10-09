@@ -275,7 +275,7 @@ class DocumentRepository
         // Salva localmente o arquivo também
         Storage::putFileAs($path, $file, $filename);
 
-        return Storage::disk('s3')->putFileAs($path, $file, $filename);
+        return Storage::disk('s3')->putFileAs($path, $file, $filename, 'public');
     }
 
     private function insertTags($tags, $documentId)
