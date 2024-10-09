@@ -212,8 +212,6 @@ class DocumentTable extends Component
 
         $buttons = $this->rowButtons();
 
-        dd($data);
-
         return view('livewire.document-table', compact('data', 'buttons'));
     }
 
