@@ -177,6 +177,7 @@ class DocumentTable extends Component
 
     public function mount()
     {
+        dd('a');
         $this->entity = 'document';
         $this->pageTitle = 'Documento';
 
