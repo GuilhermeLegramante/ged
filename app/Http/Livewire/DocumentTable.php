@@ -177,7 +177,6 @@ class DocumentTable extends Component
 
     public function mount()
     {
-        dd('a');
         $this->entity = 'document';
         $this->pageTitle = 'Documento';
 
@@ -185,6 +184,7 @@ class DocumentTable extends Component
         $this->sortDirection = 'desc';
 
         SessionService::start();
+        dd('a');
     }
 
     public function rowButtons(): array
