@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Http\Livewire\Components\Button;
 use App\Http\Livewire\Traits\Selects\WithDocumentTypeSelect;
+use App\Http\Livewire\Traits\Selects\WithFolderSelect;
 use App\Http\Livewire\Traits\Selects\WithPersonSelect;
 use App\Http\Livewire\Traits\WithDatatable;
 use App\Services\SessionService;
@@ -13,7 +14,7 @@ use Livewire\WithPagination;
 
 class DocumentTable extends Component
 {
-    use WithDatatable, WithPagination, WithDocumentTypeSelect, WithPersonSelect;
+    use WithDatatable, WithPagination, WithDocumentTypeSelect, WithPersonSelect, WithFolderSelect;
 
     public $entity;
     public $pageTitle;
@@ -61,6 +62,12 @@ class DocumentTable extends Component
             'field' => 'path',
             'label' => 'Arquivo',
             'css' => 'w-40',
+            'visible' => true,
+        ],
+        [
+            'field' => 'folderDescription',
+            'label' => 'Pasta',
+            'css' => 'w-10',
             'visible' => true,
         ],
         [
@@ -130,7 +137,13 @@ class DocumentTable extends Component
             'visible' => true,
             'editable' => 'false',
         ],
-
+        [
+            'field' => 'folderDescription',
+            'type' => 'string',
+            'css' => 'pl-12px',
+            'visible' => true,
+            'editable' => false,
+        ],
         [
             'field' => 'date',
             'type' => 'date',
@@ -173,6 +186,7 @@ class DocumentTable extends Component
     protected $listeners = [
         'selectDocumentType',
         'selectPerson',
+        'selectFolder',
     ];
 
     public function mount()
@@ -224,6 +238,7 @@ class DocumentTable extends Component
             'validityStart' => $this->validityStart,
             'validityEnd' => $this->validityEnd,
             'documentTypeId' => $this->documentTypeId,
+            'folderId' => $this->folderId,
             'person' => $this->personDescription,
             'tags' => $this->tags,
         ];

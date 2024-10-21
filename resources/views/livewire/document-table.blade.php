@@ -9,6 +9,8 @@
 
     @livewire('document-type-select')
 
+    @livewire('folder-select')
+
     @livewire('person-select')
 
 </div>
@@ -45,6 +47,11 @@
     window.livewire.on('showDocumentTypeSelectModal', () => {
         $('#modal-select-document-type').modal('show');
         Livewire.emit('documentTypeSelectModal');
+    });
+
+    window.livewire.on('showFolderSelectModal', () => {
+        $('#modal-select-folder').modal('show');
+        Livewire.emit('folderSelectModal');
     });
 
     window.livewire.on('showPersonSelectModal', () => {

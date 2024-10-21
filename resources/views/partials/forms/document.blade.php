@@ -100,6 +100,18 @@
 </div>
 
 <div class="row mt-1">
+    @include('partials.inputs.select-modal', [
+    'columnSize' => 12,
+    'label' => 'Pasta',
+    'method' => 'showFolderSelectModal',
+    'model' => 'folderId',
+    'description' => $folderDescription,
+    'modelId' => $folderId,
+    'cleanFields' => 'folderId,folderDescription',
+    ])
+</div>
+
+<div class="row mt-1">
     @include('partials.inputs.text', [
     'columnSize' => 12,
     'label' => 'Tag(s)',

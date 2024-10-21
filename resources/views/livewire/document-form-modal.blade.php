@@ -5,6 +5,8 @@
 
     @livewire('person-select')
 
+    @livewire('folder-select')
+
     @livewire('person-form-modal')
 </div>
 @push('scripts')
@@ -16,6 +18,11 @@
     window.livewire.on('showDocumentTypeSelectModal', () => {
         $('#modal-select-document-type').modal('show');
         Livewire.emit('documentTypeSelectModal');
+    });
+
+    window.livewire.on('showFolderSelectModal', () => {
+        $('#modal-select-folder').modal('show');
+        Livewire.emit('folderSelectModal');
     });
 
     window.livewire.on('showPersonSelectModal', () => {

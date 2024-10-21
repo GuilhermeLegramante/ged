@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App;
 use App\Http\Livewire\Traits\Selects\WithDocumentTypeSelect;
+use App\Http\Livewire\Traits\Selects\WithFolderSelect;
 use App\Http\Livewire\Traits\Selects\WithPersonSelect;
 use App\Http\Livewire\Traits\WithForm;
 use Illuminate\Validation\Rule;
@@ -12,7 +13,7 @@ use Livewire\WithFileUploads;
 
 class DocumentFormModal extends Component
 {
-    use WithForm, WithDocumentTypeSelect, WithFileUploads, WithPersonSelect;
+    use WithForm, WithDocumentTypeSelect, WithFileUploads, WithPersonSelect, WithFolderSelect;
 
     public $entity;
     public $pageTitle;
@@ -91,11 +92,13 @@ class DocumentFormModal extends Component
         'showDocumentFormModal',
         'selectDocumentType',
         'selectPerson',
+        'selectFolder',
     ];
 
     protected $validationAttributes = [
         'note' => 'Descrição',
         'documentTypeId' => 'Tipo de Documento',
+        'folderId' => 'Pasta',
         'file' => 'Arquivo',
         'personId' => 'Pessoa',
         'validityStart' => 'Início da Vigência',
@@ -117,6 +120,8 @@ class DocumentFormModal extends Component
             'note',
             'documentTypeId',
             'documentTypeDescription',
+            'folderId',
+            'folderDescription',
             'file',
             'number',
             'date',
@@ -145,7 +150,7 @@ class DocumentFormModal extends Component
 
     public function mount($id = null, $refreshAfterAction = false)
     {
-        $this->formTitle = strtoupper('DADOS DO(A) Documento');
+        $this->formTitle = strtoupper('DADOS DO(A) DOCUMENTO');
         $this->entity = 'document';
         $this->pageTitle = 'Documento';
 
@@ -186,6 +191,10 @@ class DocumentFormModal extends Component
 
         if (isset($data->documentTypeId)) {
             $this->selectDocumentType($data->documentTypeId);
+        }
+
+        if (isset($data->folderId)) {
+            $this->selectFolder($data->folderId);
         }
 
         if (isset($data->tags)) {

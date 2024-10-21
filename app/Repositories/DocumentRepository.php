@@ -20,6 +20,7 @@ class DocumentRepository
     {
         $this->baseQuery = DB::table($this->table)
             ->leftJoin('document_types', 'document_types.id', '=', 'documents.document_type_id')
+            ->leftJoin('folders', 'folders.id', '=', 'documents.folder_id')
             ->select(
                 $this->table . '.id AS id',
                 $this->table . '.note AS description',
@@ -32,6 +33,8 @@ class DocumentRepository
                 $this->table . '.validity_end AS validityEnd',
                 'document_types.id AS documentTypeId',
                 'document_types.description AS documentTypeDescription',
+                'folders.id AS folderId',
+                'folders.description AS folderDescription',
                 $this->table . '.created_at AS createdAt',
                 $this->table . '.updated_at AS updatedAt',
                 DB::raw('(SELECT GROUP_CONCAT(tag) FROM document_tags WHERE document_id = documents.id) AS tags'),
@@ -56,6 +59,7 @@ class DocumentRepository
     {
         $query = DB::table($this->table)
             ->leftJoin('document_types', 'document_types.id', '=', 'documents.document_type_id')
+            ->leftJoin('folders', 'folders.id', '=', 'documents.folder_id')
             ->select(
                 $this->table . '.id AS id',
                 $this->table . '.note AS description',
@@ -68,6 +72,8 @@ class DocumentRepository
                 $this->table . '.validity_end AS validityEnd',
                 'document_types.id AS documentTypeId',
                 'document_types.description AS documentTypeDescription',
+                $this->table . '.folder_id AS folderId',
+                'folders.description AS folderDescription',
                 $this->table . '.created_at AS createdAt',
                 $this->table . '.updated_at AS updatedAt',
                 DB::raw('(SELECT GROUP_CONCAT(tag) FROM document_tags WHERE document_id = documents.id) AS tags'),
@@ -97,11 +103,16 @@ class DocumentRepository
             $query = $query->having('document_types.id', '=', $filter['documentTypeId']);
         }
 
+        if (isset($filter['folderId'])) {
+            $query = $query->having($this->table . '.folder_id', '=', $filter['folderId']);
+        }
+
         if (isset($filter['person'])) {
             $query = $query->havingRaw('persons like ?', ['%' . $filter['person'] . '%']);
         }
 
-        if (isset($filter['tags'])) {
+        if (count($filter['tags']) > 0) {
+
             $tag = '';
 
             foreach ($filter['tags'] as $key => $value) {
@@ -146,6 +157,7 @@ class DocumentRepository
                     'validity_start' => isset($data['validityStart']) ? $data['validityStart'] : null,
                     'validity_end' => isset($data['validityEnd']) ? $data['validityEnd'] : null,
                     'document_type_id' => isset($data['documentTypeId']) ? $data['documentTypeId'] : null,
+                    'folder_id' => isset($data['folderId']) ? $data['folderId'] : null,
                     'user_id' => session()->get('userId'),
                     'created_at' => now(),
                 ]
@@ -195,6 +207,7 @@ class DocumentRepository
                     'validity_start' => isset($data['validityStart']) ? $data['validityStart'] : null,
                     'validity_end' => isset($data['validityEnd']) ? $data['validityEnd'] : null,
                     'document_type_id' => isset($data['documentTypeId']) ? $data['documentTypeId'] : null,
+                    'folder_id' => isset($data['folderId']) ? $data['folderId'] : null,
                     'updated_at' => now(),
                 ]
             );
