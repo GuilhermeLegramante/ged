@@ -7,6 +7,8 @@
 
     @livewire('document-type-form-modal')
 
+    @livewire('folder-form-modal')
+
     @livewire('document-type-select')
 
     @livewire('folder-select')
@@ -57,6 +59,14 @@
     window.livewire.on('showPersonSelectModal', () => {
         $('#modal-select-person').modal('show');
         Livewire.emit('personSelectModal');
+    });
+
+    window.livewire.on('showFolderFormModal', () => {
+        $('#folder-form-modal').modal('show');
+    });
+
+    window.livewire.on('hideFolderFormModal', () => {
+        $('#folder-form-modal').modal('hide');
     });
 
 </script>
