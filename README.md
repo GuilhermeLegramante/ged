@@ -19,4 +19,6 @@
     - Acrescentando busca pelo número
 - 1.4.0 (11/04/2024):
     - Filtros na listagem de documentos
+- 1.5.0 (21/10/2024):
+    - Pastas
 <hr>
